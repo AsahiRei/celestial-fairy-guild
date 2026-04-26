@@ -5,7 +5,9 @@ import {
   Heart,
   MessageCircle,
   Star,
+  CheckCircle,
 } from "lucide-react";
+import ClientForm from "./client-form";
 
 export default function Page() {
   const whyJoinUs = [
@@ -51,6 +53,13 @@ export default function Page() {
         <Star className="text-blue-300 w-full h-auto max-w-[20px] md:max-w-[25px] lg:max-w-[30px]" />
       ),
     },
+  ];
+  const requirements = [
+    "Be active at least 3 days per week",
+    "Have a positive and respectful attitude",
+    "Join our Discord server for communication",
+    "Participate in at least one guild event per month",
+    "No minimum level requirement - all are welcome!",
   ];
   return (
     <>
@@ -99,7 +108,7 @@ export default function Page() {
       </section>
       <section>
         <div className="py-18 md:py-22 lg:py-24 px-2 container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold">
                 Requirements
@@ -108,11 +117,33 @@ export default function Page() {
                 We keep our requirements simple because we believe everyone
                 deserves a chance to be part of something great.
               </p>
+              <div className="flex gap-4 flex-col mt-6">
+                {requirements.map((items, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <CheckCircle className="text-blue-300 w-full h-auto max-w-[20px] md:max-w-[25px] lg:max-w-[30px]" />
+                    <p className="font-medium">{items}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="bg-blue-950/35 py-16 px-6 rounded-lg border border-blue-800 text-center">
-
+            <div className="bg-blue-950/35 py-6 px-6 rounded-lg border border-blue-800 text-center">
+              <img src="/cf-bg.jpg" alt="cf-bg" className="rounded-xl" />
             </div>
           </div>
+        </div>
+      </section>
+      <section>
+        <div className="py-18 md:py-22 lg:py-24 px-2 container mx-auto max-w-4xl">
+          <div className="text-center">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+              Apply Now
+            </h1>
+            <p className="text-gray-400 mt-4">
+              Fill out the form below and we will get back to you within 24-48
+              hours
+            </p>
+          </div>
+          <ClientForm/>
         </div>
       </section>
     </>
