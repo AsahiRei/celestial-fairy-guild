@@ -26,18 +26,6 @@ export default function Page() {
       ),
     },
   ];
-  const news = [
-    {
-      title: "New Guild Hall Unlocked!",
-      desc: "We have finally unlocked the new guild hall expansion with additional storage and features.",
-      date: "April 20, 2026",
-    },
-    {
-      title: "Welcome to Our New Members",
-      desc: "A warm welcome to the 10 new adventurers who joined our guild this week!",
-      date: "April 15, 2026",
-    },
-  ];
   return (
     <>
       <section className="bg-[position:70%_40%] bg-[linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/cf-bg-2.jpg')] bg-cover md:mt-1 lg:mt-2">

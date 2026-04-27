@@ -44,9 +44,20 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <button className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium" onClick={() => router.push("/joinguild")}>
-                Join Guild
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium"
+                  onClick={() => router.push("/joinguild")}
+                >
+                  Join Guild
+                </button>
+                <button
+                  className="px-4 py-1 border border-gray-600 bg-slate-900 hover:text-blue-400 cursor-pointer rounded-md text-sm md:text-base font-medium"
+                  onClick={() => router.push("/auth")}
+                >
+                  Admin Login
+                </button>
+              </div>
             </li>
           </ul>
           <button
@@ -69,7 +80,10 @@ export default function Navbar() {
                 </li>
               ))}
               <li>
-                <button className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium" onClick={() => router.push("/joinguild")}>
+                <button
+                  className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium"
+                  onClick={() => router.push("/joinguild")}
+                >
                   Join Guild
                 </button>
               </li>

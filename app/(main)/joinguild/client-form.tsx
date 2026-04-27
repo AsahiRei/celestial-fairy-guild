@@ -6,7 +6,7 @@ export default function ClientForm() {
   const [currentLevel, setCurrentLevel] = useState("");
   const [discordTag, setDiscordTag] = useState("");
   return (
-    <form className="border border-gray-700 hover:border-blue-900 bg-slate-900 rounded-lg px-6 py-6 mt-4">
+    <form className="border border-gray-700 hover:border-blue-900 bg-slate-900 rounded-lg px-4 py-6 mt-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <div>
           <label className="font-medium">Ingame Name *</label>
