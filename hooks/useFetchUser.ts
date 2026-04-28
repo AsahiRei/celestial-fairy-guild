@@ -14,7 +14,7 @@ export function useFetchUser() {
       const { data, error } = await supabase
         .from("users")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("level", { ascending: false });
       if (error) {
         setError(error);
         return;

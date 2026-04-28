@@ -43,23 +43,21 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <li>
-              <div className="flex items-center gap-2">
-                <button
-                  className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium"
-                  onClick={() => router.push("/joinguild")}
-                >
-                  Join Guild
-                </button>
-                <button
-                  className="px-4 py-1 border border-gray-600 bg-slate-900 hover:text-blue-400 cursor-pointer rounded-md text-sm md:text-base font-medium"
-                  onClick={() => router.push("/auth")}
-                >
-                  Admin Login
-                </button>
-              </div>
-            </li>
           </ul>
+          <div className="lg:flex items-center gap-2 hidden">
+            <button
+              className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium"
+              onClick={() => router.push("/joinguild")}
+            >
+              Join Guild
+            </button>
+            <button
+              className="px-4 py-1 border border-gray-600 bg-slate-900 hover:text-blue-400 cursor-pointer rounded-md text-sm md:text-base font-medium"
+              onClick={() => router.push("/auth")}
+            >
+              Admin Login
+            </button>
+          </div>
           <button
             className="px-2 py-2 rounded-md bg-blue-400 hover:bg-blue-500 cursor-pointer lg:hidden block"
             onClick={() => setOpen(!isOpen)}
@@ -79,14 +77,20 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
-              <li>
+              <div className="flex flex-col items-start gap-2">
                 <button
                   className="px-4 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-md font-medium"
                   onClick={() => router.push("/joinguild")}
                 >
                   Join Guild
                 </button>
-              </li>
+                <button
+                  className="px-4 py-1 border border-gray-600 bg-slate-900 hover:text-blue-400 cursor-pointer rounded-md font-medium"
+                  onClick={() => router.push("/auth")}
+                >
+                  Admin Login
+                </button>
+              </div>
             </ul>
           </div>
         </div>

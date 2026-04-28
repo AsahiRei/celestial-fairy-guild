@@ -6,8 +6,9 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div>
-
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
+      <div></div>
+      <div className="bg-blue-400"></div>
     </div>
   );
 }
