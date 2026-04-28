@@ -1,11 +1,35 @@
 "use client";
 import { useState } from "react";
 import { useFetchUser } from "@/hooks/useFetchUser";
+import { motion, type Variants } from "motion/react";
 
 export default function ClientMembers() {
   const { users, loading, error, highestLevel, totalGuildPoints } = useFetchUser();
   const [search, setSearch] = useState("");
   const [activeRole, setActiveRole] = useState("All");
+
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const item: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
+  };
+
   const buttonTabs = [
     { label: "All" },
     { label: "Guild Master" },
@@ -13,18 +37,22 @@ export default function ClientMembers() {
     { label: "Officer" },
     { label: "Spina Dealer" },
   ];
+
   const roleColor = (role: string) => {
     if (role == "Guild Master") return "bg-purple-400";
     if (role == "Vice Master") return "bg-blue-400";
     if (role == "Officer") return "bg-green-400";
     if (role == "Spina Dealer") return "bg-yellow-400";
     if (role == "Support") return "bg-slate-400";
+    if (role == "Admin") return "bg-red-400";
   };
+
   const guildStats = [
     { label: "Total Members", value: users?.length || 0 },
     { label: "Highest Level", value: highestLevel || 0 },
     { label: "Guild Points", value: totalGuildPoints || 0 },
   ];
+
   const filteredUsers = users?.filter((user) => {
     const matchesSearch =
       (user.username || "").toLowerCase().includes(search.toLowerCase()) ||
@@ -34,9 +62,11 @@ export default function ClientMembers() {
     const matchesRole = activeRole === "All" || user.role === activeRole;
     return matchesSearch && matchesRole;
   });
+
   if (loading) {
     return <div className="text-center text-gray-400 py-12">Loading...</div>;
   }
+
   if (error) {
     return (
       <div className="text-center text-red-500 py-12">
@@ -44,21 +74,30 @@ export default function ClientMembers() {
       </div>
     );
   }
+
   return (
     <>
       <section className="container mx-auto max-w-7xl pb-26 md:pb-28 lg:pb-32 px-2">
-        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+        >
           {guildStats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={item}
               className="border border-gray-700 bg-slate-900 rounded-lg px-6 py-8"
             >
               <h1 className="text-3xl font-bold text-blue-400">{stat.value}</h1>
               <p className="mt-2 text-gray-400">{stat.label}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
+
       <section className="bg-slate-900/45">
         <div className="container mx-auto max-w-7xl py-6 px-2 flex justify-center lg:justify-between items-center flex-wrap gap-4">
           <input
@@ -83,6 +122,7 @@ export default function ClientMembers() {
           </div>
         </div>
       </section>
+
       <section className="py-18 md:py-20 lg:py-22">
         <div className="w-full overflow-x-auto container mx-auto max-w-7xl px-2">
           <table className="w-full min-w-[700px] border-collapse">
@@ -91,14 +131,17 @@ export default function ClientMembers() {
                 <th className="border border-gray-600 px-4 py-2">Name</th>
                 <th className="border border-gray-600 px-4 py-2">Level</th>
                 <th className="border border-gray-600 px-4 py-2">Role</th>
-                <th className="border border-gray-600 px-4 py-2">
-                  Guild Points
-                </th>
+                <th className="border border-gray-600 px-4 py-2">Guild Points</th>
                 <th className="border border-gray-600 px-4 py-2">Playstyle</th>
                 <th className="border border-gray-600 px-4 py-2">Actions</th>
               </tr>
             </thead>
-            <tbody>
+
+            <motion.tbody
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
               {(filteredUsers?.length ?? 0) === 0 ? (
                 <tr>
                   <td
@@ -110,7 +153,7 @@ export default function ClientMembers() {
                 </tr>
               ) : (
                 filteredUsers.map((items, index) => (
-                  <tr key={index}>
+                  <motion.tr key={index} variants={item}>
                     <td className="border border-gray-600 px-4 py-2">
                       <div className="flex items-center gap-2">
                         <img
@@ -121,9 +164,11 @@ export default function ClientMembers() {
                         {items.username}
                       </div>
                     </td>
+
                     <td className="border border-gray-600 px-4 py-2">
                       {items.level}
                     </td>
+
                     <td className="border border-gray-600 px-4 py-2">
                       <div className="flex">
                         <div
@@ -133,12 +178,15 @@ export default function ClientMembers() {
                         </div>
                       </div>
                     </td>
+
                     <td className="border border-gray-600 px-4 py-2">
                       {(items.guild_points || 0).toLocaleString()}
                     </td>
+
                     <td className="border border-gray-600 px-4 py-2">
                       {items.playstyle}
                     </td>
+
                     <td className="border border-gray-600 px-4 py-2">
                       <div className="flex">
                         <button className="px-2 py-1 bg-blue-400 hover:bg-blue-500 cursor-pointer font-medium rounded-md text-sm">
@@ -146,10 +194,10 @@ export default function ClientMembers() {
                         </button>
                       </div>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))
               )}
-            </tbody>
+            </motion.tbody>
           </table>
         </div>
       </section>
