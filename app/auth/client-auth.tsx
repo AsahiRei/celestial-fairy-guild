@@ -1,9 +1,21 @@
 "use client";
 import { useState } from "react";
+import useAdminCheck from "@/hooks/useAdminCheck";
 export default function ClientAuth() {
   const [passcode, setPasscode] = useState("");
+  const { userExists } = useAdminCheck();
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const exists = await userExists(Number(passcode));
+    if (exists) {
+      console.log("User exists");
+    } else {
+      console.log("User does not exist");
+    }
+  };
   return (
-    <form className="w-full max-w-md">
+    <form className="w-full max-w-md" onSubmit={handleLogin}>
       <h1 className="text-white text-xl md:text-2xl lg:text-3xl font-semibold">
         Admin Login
       </h1>
