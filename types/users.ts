@@ -5,5 +5,6 @@ export default interface Users {
   role: string;
   playstyle: string;
   guild_points: number;
+  user_img?: string;
   created_at: string;
 }

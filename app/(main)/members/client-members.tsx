@@ -157,7 +157,7 @@ export default function ClientMembers() {
                     <td className="border border-gray-600 px-4 py-2">
                       <div className="flex items-center gap-2">
                         <img
-                          src="/placeholder-icon.jpg"
+                          src={items.user_img || "/placeholder-icon.jpg"}
                           alt={items.username || "user"}
                           className="w-full h-auto rounded-full max-w-[40px]"
                         />

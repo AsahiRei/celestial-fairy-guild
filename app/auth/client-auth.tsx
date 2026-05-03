@@ -1,15 +1,17 @@
 "use client";
 import { useState } from "react";
 import useAdminCheck from "@/hooks/useAdminCheck";
+import { useRouter } from "next/navigation";
 export default function ClientAuth() {
   const [passcode, setPasscode] = useState("");
+  const router = useRouter();
   const { userExists } = useAdminCheck();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const exists = await userExists(Number(passcode));
     if (exists) {
-      console.log("User exists");
+      router.push("/auth/admin");
     } else {
       console.log("User does not exist");
     }
@@ -26,7 +28,7 @@ export default function ClientAuth() {
         </label>
         <input
           id="passcode"
-          type="passcode"
+          type="password"
           value={passcode}
           placeholder="Enter your passcode"
           onChange={(e) => setPasscode(e.target.value)}
